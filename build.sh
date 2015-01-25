@@ -223,7 +223,8 @@ EOF
   log "Created Gentoo root volume snapshot $snapshot_id"
   log "Waiting for snapshot $snapshot_id to compete"
   log 'Snapshoting a 10G volume may take 15 minutes'
-  log 'The Gentoo install is complete and'
+  log 'The Gentoo install is complete you can interrupt this script now or'
+  log 'wait for the snapshot to complete.'
 
   declare -l status='' progress
 
