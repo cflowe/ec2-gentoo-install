@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [ ! -e /home/ec2-user ]; then
+  cp -r /etc/skel /home/ec2-user
+  chown -R ec2-user:ec2-user /home/ec2-user
+fi
+
+if [ ! -d /home/ec2-user/.ssh ] ; then
+  install -d -m 0700 -o ec2-user -g ec2-user /home/ec2-user/.ssh
+fi
+
+if [ ! -e /home/ec2-user/.ssh/authorized_keys ]; then
+  install -m 0600 -o ec2-user -g ec2-user /dev/null \
+      /home/ec2-user/.ssh/authorized_keys
+fi
+
+pubkey=$(curl --silent \
+    http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key)
+
+if [ -n "$pubkey" ]; then
+  if ! grep -q "$pubkey" /home/ec2-user/.ssh/authorized_keys; then
+    echo "$pubkey" >> /home/ec2-user/.ssh/authorized_keys
+  fi
+fi
+
+hostname=$(curl --silent http://169.254.169.254/latest/meta-data/hostname \
+    | cut -d. -f1)
+
+if [ -n "$hostname" ]; then
+  echo "hostname=\"$hostname\"" > /etc/conf.d/hostname
+  echo "$hostname" > /etc/hostname
+else
+  echo 'hostname="localhost"' > /etc/conf.d/hostname
+  echo localhost > /etc/hostname
+fi
+
+/etc/init.d/hostname restart

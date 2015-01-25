@@ -1,0 +1,5 @@
+*.pem
+*.swp
+*.log
+build-root.tar.bz2
+stage
