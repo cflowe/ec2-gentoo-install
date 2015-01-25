@@ -60,11 +60,11 @@ EOF
   cd /tmp
 
   log 'Downloading stage3'
-  #curl -O \
-  #    "http://gentoo.mirrors.pair.com/releases/amd64/autobuilds/${stage}3"
+  curl -O \
+      "http://gentoo.mirrors.pair.com/releases/amd64/autobuilds/${stage3}"
 
-  #curl -O \
-  #    "http://gentoo.mirrors.pair.com/releases/amd64/autobuilds/${stage3}.CONTENTS"
+  curl -O \
+      "http://gentoo.mirrors.pair.com/releases/amd64/autobuilds/${stage3}.CONTENTS"
 
   curl -O \
       "http://gentoo.mirrors.pair.com/releases/amd64/autobuilds/${stage3}.DIGESTS"
