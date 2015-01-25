@@ -2,7 +2,10 @@ app-admin/logrotate
 app-admin/mcelog
 app-admin/sudo
 app-admin/syslog-ng
+app-arch/bzip2
+app-arch/gzip
 app-arch/unzip
+app-arch/xz-utils
 app-editors/nano
 app-editors/vim
 app-misc/screen
